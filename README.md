@@ -4,6 +4,12 @@
 
 An agent skill for generating short Korean stories constrained to a learner's known grammar, language level, and study preferences.
 
+I created this skill as a way to get reading practice with material that scales with my level. Depending on your location, it can be
+quite hard to find beginner reading material that feels natural and covers topics that are personally interesting. Particularly, I
+wanted reading material that is constrained to the grammar patterns I already know, in order to reinforce them and get practice
+without constantly encountering new information that needs to be learned.
+
+
 ## Setup
 
 Copy or symlink the skill directory into your own agent skills directory:
@@ -31,6 +37,9 @@ If no topic or level is provided, the skill asks for the missing information bef
 - Uses only a natural subset of grammar patterns listed in `GRAMMAR.md`.
 - Adapts vocabulary and sentence complexity to the learner's Sejong level.
 - Can include an English translation, grammar table, vocabulary list, and practice questions.
+
+<img width="969" height="796" alt="iyagi-incubator-1" src="https://github.com/user-attachments/assets/51ef5652-3e2d-40bd-90ce-6be3c976936b" />
+<img width="969" height="880" alt="iyagi-incubator-2" src="https://github.com/user-attachments/assets/077869ea-3903-4fc9-b8f4-e77f7f400449" />
 
 ## Skill files
 
