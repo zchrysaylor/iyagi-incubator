@@ -37,15 +37,9 @@ If no topic or level is provided, the skill asks for the missing information bef
 - Uses only a natural subset of grammar patterns listed in `GRAMMAR.md`.
 - Adapts vocabulary and sentence complexity to the learner's Sejong level.
 - Can include an English translation, grammar table, vocabulary list, and practice questions.
+- Renders each story as a one-page PDF via a bundled Typst template.
 
-<img width="969" height="796" alt="iyagi-incubator-1" src="https://github.com/user-attachments/assets/51ef5652-3e2d-40bd-90ce-6be3c976936b" />
-<img width="969" height="880" alt="iyagi-incubator-2" src="https://github.com/user-attachments/assets/077869ea-3903-4fc9-b8f4-e77f7f400449" />
-
-## Skill files
-
-- `skills/iyagi-incubator/SKILL.md`: workflow and generation rules.
-- `skills/iyagi-incubator/GRAMMAR.md`: known grammar formulas, one per row.
-- `skills/iyagi-incubator/PROFILE.md`: default level and output preferences.
+<img width="969" alt="iyagi-incubator example PDF" src="skills/iyagi-incubator/resources/example.pdf.png" />
 
 ## Customization
 

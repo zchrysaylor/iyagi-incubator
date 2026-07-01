@@ -41,6 +41,72 @@ When generating a story:
 4. Add a compact table: formula, sentence from the story, meaning in context.
 5. Add 5-10 useful vocabulary items if enabled in `PROFILE.md`.
 6. Add 2-3 comprehension or rewrite questions for practice titled if enabled in `PROFILE.md`.
+7. Compile the aesthetic one-page PDF with the Typst template (see [Compiled one-pager](#compiled-one-pager-typst)).
+
+## Compiled one-pager (Typst)
+
+After presenting the story in chat, render a one-page PDF with the bundled Typst template so the learner gets a keepsake study sheet.
+
+- Requires the `typst` CLI. Check with `typst --version`; if it is missing, tell the user (e.g. `brew install typst`) and skip this step rather than failing.
+- `iyagi-template.typ` is the reusable template. It defines `iyagi-sheet(...)` and all styling (colored section headers, masthead, grammar/vocabulary tables). **Do not edit it per story** — only fill an instance file.
+- `example.typ` / `example.pdf` are a worked example you can mimic.
+
+### Steps
+
+1. Pick a short kebab-case slug from the topic (e.g. `first-love`).
+2. Write an instance file `<slug>.typ` to the current working directory (or a path the user gives). Its first line imports the template **by absolute path**:
+   `#import "<SKILL_DIR>/iyagi-template.typ": iyagi-sheet`
+   Replace `<SKILL_DIR>` with the absolute path of this skill's directory (the folder this `SKILL.md` lives in).
+3. Call `iyagi-sheet(...)` with the story data (skeleton below). Pass `none` for any section that is disabled in `PROFILE.md` — the template omits it automatically.
+4. Compile: `typst compile --root / <slug>.typ <slug>.pdf`
+   (`--root /` lets Typst read the template from its absolute location. Alternatively, copy `iyagi-template.typ` next to the instance, import it as `"iyagi-template.typ"`, and compile without `--root` to get a self-contained bundle.)
+5. Confirm it compiled and tell the user the PDF path. The layout targets one A4 page; if content overflows, trim vocabulary to ~8 items or shorten the story.
+
+### Argument mapping
+
+- `topic`, `level`: strings.
+- `grammar-count`: integer (the target grammar count from step 1).
+- `korean`, `english`: content blocks `[ ... ]`. Separate paragraphs with one blank line. Use `english: none` when translation is disabled.
+- `grammar`: array of `(formula: "...", sentence: "...", meaning: "...")` dictionaries — one per row of the grammar table.
+- `vocab`: array of `("한국어", "english")` pairs, or `none`.
+- `questions`: array of content blocks `[ ... ]`, or `none`.
+
+### Escaping (inside the `.typ` file)
+
+- In `"..."` strings, write `\\` for a literal backslash and `\"` for a literal quote.
+- In `[ ... ]` content blocks, prefix any literal `#`, `*`, `_`, `@`, `<`, `>`, `` ` ``, `$`, `\`, `[`, or `]` with a backslash. Straight quotes `"` are safe (Typst renders smart quotes).
+- Never use romanization anywhere.
+
+### Instance skeleton
+
+```typ
+#import "<SKILL_DIR>/iyagi-template.typ": iyagi-sheet
+
+#iyagi-sheet(
+  topic: "first love",
+  level: "2A",
+  grammar-count: 6,
+  korean: [
+    첫 번째 문단…
+
+    두 번째 문단…
+  ],
+  english: [
+    First paragraph…
+
+    Second paragraph…
+  ],
+  grammar: (
+    (formula: "있어요", sentence: "민수는 첫사랑이 있었어요.", meaning: "Minsu had a first love."),
+  ),
+  vocab: (
+    ("첫사랑", "first love"),
+  ),
+  questions: (
+    [민수의 첫사랑은 누구예요?],
+  ),
+)
+```
 
 ## If context is missing
 
